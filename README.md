@@ -58,6 +58,11 @@ As a baseline, vector representation of sentences are often encoded by averaging
 
 Of course this could theoretically be learnt if we trained word embeddings at the same time as training the sentence encoder. But often we do it in 2 steps, so leaving the space of vectors with a norm higher than 1 for sentences and those with norm lower than 1 for words seems like a good idea.  
 
+#### Trivial Online Learning
+As there are no learnt parameters and no co-occurence matrice, everyone can simply continue training the word embeddings on their data. The only parameter which could be stored is the weight whuch decreases with training, but it's a scalar so can easily be stored.
+
+Having no co-occurence matrix also makes it easy to train on a data that has (a small number) of new words: simply add a few phrases with that word in it and you learnt it's vector!
+
 ### Disadvantages
 Of course even before testing out the idea I see some issues:
 
