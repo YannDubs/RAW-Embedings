@@ -36,8 +36,8 @@ RAW embeddings could possibly be faster than word2vec/Fasttext and more memory e
 
 #### More Interpretable : 
 
-**Norm = "strength" of meaning.** 
-**Angle = meaning.** 
+* **Norm = "strength" of meaning.** 
+* **Angle = meaning.** 
 
 Bringing word embeddings closer to the rolling average means that vectors will never increase of size: their norm will be constrained (although I have to rescale them at the begining so that they do not all converge to 0). The scale of the vector will thus represent how often it is found around similar words. For example stopwords like "and" that are found near all words will be approximatvely 0 (close to all vectors), which is what we want as they do not convey much meaning.  As the norm will convey the "strength" of the meaning, the angle will have to represent the meaning.
 
