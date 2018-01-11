@@ -94,7 +94,8 @@ I haven't tweeked the model and hyperparameters yet. The current implementation 
 ## Get Started
 
 1. `pip install -r requirements-dev.txt`
-2. Use the package in python :
+2. Put some data in `data/corpora/`. Ex: wiki dump.
+3. Use the package in python :
 
 ```python
 from raw.embeddings import RawEmbedding
@@ -106,4 +107,4 @@ embeddings.nearest_analogy(pos=['woman', 'king'],neg=['man'],metric='cosine')
 ```
 
 
-More examples in `Notebooks/Inital_Results.ipynb`
+More examples in `notebooks/Inital_Results.ipynb`
