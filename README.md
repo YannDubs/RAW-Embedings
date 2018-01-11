@@ -1,4 +1,5 @@
 # Rolling Average Word Embeddings (RAW Embeddings)
+
 Since Mikolov's 2013 paper on word2vec many other word embeddings algorithms appeard (GloVe, FastText, ...). Although the algorithm are different the main idea behind the majority of them is similar : 
 
 > Words that are often found in the same context should have similar vectors.
@@ -86,3 +87,23 @@ Here are some notes to keep in mind:
 * If all word embeddings are equal to the same value then they will never change. Although random initialization and rescaling should prohibit this in practice, the theory is still not satisfactory. One way of avoiding this would be to push the current word embedding further from X randomly sampled other vectors at each step. In the case of random initilaization this should be equivalent as rescaling the vector, as the expectation over all vectors will be 0 (i.e pushing away from 0 is the same as rescaling). But this would mean better theoretical propreties as the word embeddings would be independant of the initilaization when X -> inf and nEpoch -> inf.
 * If we really wanted most sentences to have a norm higher than 1 we should constrain word embeddings to be positive (easily done by initializing with positive values for each dimensions). But the idea of letting negative dimensions for encoding words such as antonyms seems appealing.
 * If you want to mimmic a *word2vec* symmetric window, you can run the algorithm both in a forward and backward pass of the corpus.
+
+## Results 
+I haven't tweeked the model and hyperparameters yet. The current implementation is a crude initial code where many things could be improved. Still you can find the results in `Notebooks/Inital_Results.ipynb`
+
+## Get Started
+
+1. `pip install -r requirements-dev.txt`
+2. Use the package in python :
+
+```python
+from raw.embeddings import RawEmbedding
+
+embeddings = RawEmbedding()
+embeddings.train(glob.glob("data/corpora/*"))
+
+embeddings.nearest_analogy(pos=['woman', 'king'],neg=['man'],metric='cosine')
+```
+
+
+More examples in `Notebooks/Inital_Results.ipynb`

@@ -5,6 +5,7 @@
 venv*/
 data/*
 old*
+backup.txt
 
 # extensions to remove
 *.egg-info
