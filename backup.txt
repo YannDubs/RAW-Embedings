@@ -1,0 +1,144 @@
+After some intial experimets, the norms seems to really correlate with the strength of the word meaning, but the semantics doesn't seem to be encoded by the angle. It could well be because of the hyperparameters / small data set . But I think it is due to how I am rescaling, I'm am currently implementing 2 new methods for that.
+
+Below are some experiments n the Initial run on small wikipedia subset. 
+ 
+ **Smallest Norm**:
+('the', 2.363258381438894e-14),
+ ('to', 3.571550883521631e-14),
+ ('a', 4.142192444717284e-14),
+ ('and', 7.186150564378315e-14),
+ ('of', 9.126342752228741e-14)
+ 
+The largest norms were words with spelling mistakes. Or words that didn't exist. I should remove these extremely rare words.
+             
+**Similarities**:
+
+-- braycurtis --
+* cat | odict_keys(['disaster', 'spaces', 'acre', 'pc', 'madrid'])
+* dog | odict_keys(['comprised', 'childrens', 'incident', 'rear', 'identical'])
+* germany | odict_keys(['computer', 'stations', 'georgia', 'similar', 'standard'])
+* man | odict_keys(['process', 'reached', 'subject', 'income', 'competition'])
+* yellow | odict_keys(['dbindexa', 'purchased', 'socialist', 'broken', 'bishop'])
+* computer | odict_keys(['similar', 'germany', 'ability', 'units', 'start'])
+* kiwi | odict_keys(['boniface', 'padma', 'puppy', 'witchcraft', 'jesuits'])
+* banana | odict_keys(['remixes', 'sequels', 'collects', 'contributes', 'lyrical'])
+
+-- canberra --
+* cat | odict_keys(['reduction', 'yankees', 'keeps', 'mechanical', 'exceptions'])
+* dog | odict_keys(['seek', 'childrens', 'commissioner', 'assessment', 'statistics'])
+* germany | odict_keys(['common', 'power', 'operations', 'runs', 'book'])
+* man | odict_keys(['process', 'scotland', 'hit', 'having', 'although'])
+* yellow | odict_keys(['opposite', 'universal', 'teach', 'zero', 'elementary'])
+* computer | odict_keys(['oklahoma', 'action', 'question', 'start', 'considered'])
+* kiwi | odict_keys(['jared', 'blogendofarticledocdoc', 'hwang', 'brann', 'nectar'])
+* banana | odict_keys(['diabetes', 'goldberg', 'brewing', 'assassin', 'boyle'])
+
+-- chebyshev --
+* cat | odict_keys(['observation', 'considering', 'credits', 'surrounded', 'focused'])
+* dog | odict_keys(['sort', 'childrens', 'fundamental', 'consecutive', 'worldwide'])
+* germany | odict_keys(['stations', 'six', 'technology', 'similar', 'arts'])
+* man | odict_keys(['took', 'civil', 'america', 'played', 'final'])
+* yellow | odict_keys(['store', 'speech', 'streets', 'expanded', 'employment'])
+* computer | odict_keys(['similar', 'germany', 'georgia', 'stations', 'leader'])
+* kiwi | odict_keys(['puppy', 'witchcraft', 'boniface', 'jesuits', 'valentines'])
+* banana | odict_keys(['jade', 'nielsen', 'remixes', 'activation', 'mess'])
+
+-- cityblock --
+* cat | odict_keys(['computers', 'survived', 'credits', 'branches', 'focused'])
+* dog | odict_keys(['examples', 'settled', 'check', 'duke', 'athletic'])
+* germany | odict_keys(['program', 'science', 'c', 'so', 'released'])
+* man | odict_keys(['nd', 'income', 'ireland', 'kingdom', 'between'])
+* yellow | odict_keys(['subjects', 'develop', 'evidence', 'defined', 'network'])
+* computer | odict_keys(['germany', 'cities', 'units', 'song', 'naval'])
+* kiwi | odict_keys(['boniface', 'jesuits', 'puppy', 'witchcraft', 'padma'])
+* banana | odict_keys(['contributes', 'plagued', 'sequels', 'drainage', 'displaying'])
+
+-- correlation --
+* cat | odict_keys(['riff', 'disaster', 'acre', 'plaque', 'anderson'])
+* dog | odict_keys(['dog', 'cauldron', 'roadthe', 'tramp', 'prefectures', 'manufacturer'])
+* germany | odict_keys(['precursors', 'originate', 'joshi', 'gk', 'ishikawa'])
+* man | odict_keys(['dwell', 'gsta', 'castleneedlestarting', 'propulsion', 'berthold'])
+* yellow | odict_keys(['bureaucratic', 'gwyneth', 'concepcion', 'inlet', 'stonewall'])
+* computer | odict_keys(['requesting', 'originate', 'laguna', 'joshi', 'squads'])
+* kiwi | odict_keys(['lille', 'boring', 'squash', 'teri', 'oi'])
+* banana | odict_keys(['ventral', 'remixes', 'modena', 'twig', 'empires'])
+
+-- cosine --
+* cat | odict_keys(['riff', 'disaster', 'acre', 'skinny', 'anderson'])
+* dog | odict_keys(['roadthe', 'cauldron', 'tramp', 'ambitious', 'minutecanadian'])
+* germany | odict_keys(['precursors', 'originate', 'joshi', 'ishikawa', 'gk'])
+* man | odict_keys(['dwell', 'gsta', 'castleneedlestarting', 'berthold', 'propulsion'])
+* yellow | odict_keys(['bureaucratic', 'gwyneth', 'concepcion', 'inlet', 'franceexternal'])
+* computer | odict_keys(['requesting', 'originate', 'laguna', 'joshi', 'squads'])
+* kiwi | odict_keys(['lille', 'squash', 'boring', 'teri', 'japanendofarticledocdoc'])
+* banana | odict_keys(['banana', 'remixes', 'ventral', 'twig', 'concorde', 'modena'])
+
+-- euclidean --
+* cat | odict_keys(['observation', 'focused', 'credits', 'computers', 'branches'])
+* dog | odict_keys(['consecutive', 'duke', 'settled', 'containing', 'setting'])
+* germany | odict_keys(['stations', 'six', 'band', 'economic', 'great'])
+* man | odict_keys(['income', 'board', 'census', 'age', 'international'])
+* yellow | odict_keys(['philippines', 'speech', 'railroad', 'expanded', 'color'])
+* computer | odict_keys(['similar', 'germany', 'stations', 'six', 'technology'])
+* kiwi | odict_keys(['boniface', 'puppy', 'jesuits', 'witchcraft', 'valentines'])
+* banana | odict_keys(['traction', 'plagued', 'drainage', 'remixes', 'jade'])
+
+-- hamming --
+* cat | odict_keys(['producersrick', 'summergeographythe', 'kuvat', 'duvallstephen', 'authorgoulburn'])
+* dog | odict_keys(['trainingliterary', 'kuvat', 'duvallstephen', 'authorgoulburn', 'awardadam'])
+* germany | odict_keys(['authorgoulburn', 'producersrick', 'kuvat', 'duvallstephen', 'awardadam'])
+* man | odict_keys(['authorgoulburn', 'producersrick', 'kuvat', 'duvallstephen', 'awardadam'])
+* yellow | odict_keys(['authorgoulburn', 'summergeographythe', 'kuvat', 'duvallstephen', 'producersrick'])
+* computer | odict_keys(['trainingliterary', 'walkinperformerspaul', 'authorgoulburn', 'producersrick', 'kuvat'])
+* kiwi | odict_keys(['producersrick', 'summergeographythe', 'kuvat', 'duvallstephen', 'programsleadership'])
+* banana | odict_keys(['producersrick', 'trainingliterary', 'duvallstephen', 'authorgoulburn', 'summergeographythe'])
+
+-- jaccard --
+* cat | odict_keys(['producersrick', 'summergeographythe', 'kuvat', 'duvallstephen', 'authorgoulburn'])
+* dog | odict_keys(['trainingliterary', 'kuvat', 'duvallstephen', 'authorgoulburn', 'awardadam'])
+* germany | odict_keys(['authorgoulburn', 'producersrick', 'kuvat', 'duvallstephen', 'awardadam'])
+* man | odict_keys(['authorgoulburn', 'producersrick', 'kuvat', 'duvallstephen', 'awardadam'])
+* yellow | odict_keys(['authorgoulburn', 'summergeographythe', 'kuvat', 'duvallstephen', 'producersrick'])
+* computer | odict_keys(['trainingliterary', 'walkinperformerspaul', 'authorgoulburn', 'producersrick', 'kuvat'])
+* kiwi | odict_keys(['producersrick', 'summergeographythe', 'kuvat', 'duvallstephen', 'programsleadership'])
+* banana | odict_keys(['producersrick', 'trainingliterary', 'duvallstephen', 'authorgoulburn', 'summergeographythe'])
+
+-- mahalanobis --
+* cat | odict_keys(['observation', 'focused', 'credits', 'computers', 'branches'])
+* dog | odict_keys(['consecutive', 'duke', 'settled', 'containing', 'setting'])
+* germany | odict_keys(['stations', 'six', 'band', 'economic', 'great'])
+* man | odict_keys(['income', 'board', 'census', 'age', 'international'])
+* yellow | odict_keys(['philippines', 'speech', 'railroad', 'expanded', 'color'])
+* computer | odict_keys(['similar', 'germany', 'stations', 'six', 'technology'])
+* kiwi | odict_keys(['boniface', 'puppy', 'jesuits', 'witchcraft', 'valentines'])
+* banana | odict_keys(['traction', 'plagued', 'drainage', 'remixes', 'jade'])
+
+-- minkowski --
+* cat | odict_keys(['observation', 'focused', 'credits', 'computers', 'branches'])
+* dog | odict_keys(['consecutive', 'duke', 'settled', 'containing', 'setting'])
+* germany | odict_keys(['stations', 'six', 'band', 'economic', 'great'])
+* man | odict_keys(['income', 'board', 'census', 'age', 'international'])
+* yellow | odict_keys(['philippines', 'speech', 'railroad', 'expanded', 'color'])
+* computer | odict_keys(['similar', 'germany', 'stations', 'six', 'technology'])
+* kiwi | odict_keys(['boniface', 'puppy', 'jesuits', 'witchcraft', 'valentines'])
+* banana | odict_keys(['traction', 'plagued', 'drainage', 'remixes', 'jade'])
+
+-- seuclidean --
+* cat | odict_keys(['observation', 'focused', 'credits', 'computers', 'branches'])
+* dog | odict_keys(['consecutive', 'duke', 'settled', 'containing', 'setting'])
+* germany | odict_keys(['stations', 'six', 'band', 'economic', 'great'])
+* man | odict_keys(['income', 'board', 'census', 'age', 'international'])
+* yellow | odict_keys(['philippines', 'speech', 'railroad', 'expanded', 'color'])
+* computer | odict_keys(['similar', 'germany', 'stations', 'six', 'technology'])
+* kiwi | odict_keys(['boniface', 'puppy', 'jesuits', 'witchcraft', 'valentines'])
+* banana | odict_keys(['traction', 'plagued', 'drainage', 'remixes', 'jade'])
+
+-- sqeuclidean --
+* cat | odict_keys(['observation', 'focused', 'credits', 'computers', 'branches'])
+* dog | odict_keys(['consecutive', 'duke', 'settled', 'containing', 'setting'])
+* germany | odict_keys(['stations', 'six', 'band', 'economic', 'great'])
+* man | odict_keys(['income', 'board', 'census', 'age', 'international'])
+* yellow | odict_keys(['philippines', 'speech', 'railroad', 'expanded', 'color'])
+* computer | odict_keys(['similar', 'germany', 'stations', 'six', 'technology'])
+* kiwi | odict_keys(['boniface', 'puppy', 'jesuits', 'witchcraft', 'valentines'])
+* banana | odict_keys(['traction', 'plagued', 'drainage', 'remixes', 'jade'])

@@ -78,10 +78,7 @@ class Embedding:
         """Returns words associated with indices."""
         if not isinstance(idx,list):
             idx = [idx]
-        words = []
-        for k,v in self.hash.items():
-            if v in idx:
-                words.append(k)
+        words = [k for k,v in self.hash.items() if v in idx]
         return squeeze(words)
             
     def __getitem__(self, idx):
@@ -108,7 +105,7 @@ class Embedding:
     def shape(self):
         return self.embeddings.shape
     
-    def nearest_neigbours(self,word,k=5,metric="cosine",**kwargs):
+    def nearest_neigbours(self,word,k=5,metric="euclidean",**kwargs):
         """
         Finds the k most similar words to the given one.
         
@@ -140,7 +137,7 @@ class Embedding:
             word = self[word]
         return nearest_neighbours(self.embeddings, word, self._word, k=k, metric=metric, **kwargs)
     
-    def intra_similarity(self,txt,metric="cosine",**kwargs):
+    def intra_similarity(self,txt,metric="euclidean",**kwargs):
         """
         Returns a similarity matrix between each words of a phrase.
         
@@ -167,7 +164,7 @@ class Embedding:
         embeddings = self.gets(txt)
         return cdist(embeddings,embeddings,metric=metric,**kwargs)
 
-    def nearest_analogy(self,pos,neg,k=5,metric="cosine",**kwargs):
+    def nearest_analogy(self,pos,neg,k=5,metric="euclidean",**kwargs):
         """
         Analogy similarity.
         
